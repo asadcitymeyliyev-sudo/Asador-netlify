@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Asador</title>
+<style>
+  body {
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    background: linear-gradient(135deg,#4c669f,#3b5998,#192f6a);
+    font-family: sans-serif;
+    color:white;
+    overflow:hidden;
+  }
+
+  /* Логотип с пульсацией */
+  .logo {
+    width:120px;
+    height:120px;
+    margin-bottom:20px;
+    opacity:0;
+    transform: translateY(-50px);
+    animation: logoFade 1.5s forwards, logoPulse 2s infinite 2s;
+  }
+
+  @keyframes logoFade {
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes logoPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  /* Заголовок и подзаголовок с плаванием */
+  h1, p {
+    opacity:0;
+    animation: fadeInText 1.5s forwards;
+  }
+
+  h1 {
+    font-size:3rem;
+    margin-bottom:15px;
+    animation-delay:0.8s;
+    animation-name: fadeInText, floatText;
+    animation-duration:1.5s, 3s;
+    animation-fill-mode:forwards;
+    animation-iteration-count:1, infinite;
+    animation-timing-function: ease-in-out, ease-in-out;
+  }
+
+  p {
+    font-size:1.2rem;
+    margin-bottom:40px;
+    animation-delay:1.5s;
+    animation-name: fadeInText, floatText;
+    animation-duration:1.5s, 3s;
+    animation-fill-mode:forwards;
+    animation-iteration-count:1, infinite;
+    animation-timing-function: ease-in-out, ease-in-out;
+  }
+
+  @keyframes fadeInText {
+    to { opacity:1; }
+  }
+
+  @keyframes floatText {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  /* Кнопка с подпрыгиванием */
+  button {
+    padding: 15px 50px;
+    border:none;
+    border-radius:30px;
+    background:white;
+    color:#3b5998;
+    font-weight:bold;
+    font-size:1.2rem;
+    cursor:pointer;
+    opacity:0;
+    transform: translateY(20px);
+    animation: fadeInButton 1s forwards 2s, buttonBounce 1.5s infinite 3s;
+    transition: transform 0.2s;
+  }
+
+  button:hover {
+    transform: translateY(-5px);
+  }
+
+  @keyframes fadeInButton {
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  @keyframes buttonBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+</style>
+</head>
+<body>
+  <img src="icon-192.png" alt="Asador Logo" class="logo">
+  <h1>Welcome to Asador</h1>
+  <p>Your journey starts here 😎</p>
+  <button onclick="goNext()">Get Started</button>
+
+  <script>
+    // Автоматический переход на index.html через 3 секунды
+    setTimeout(goNext, 3000);
+
+    function goNext() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
