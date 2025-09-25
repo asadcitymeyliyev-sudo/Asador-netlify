@@ -3,32 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Splash - Asador</title>
+  <title>Welcome to Asador</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #0d1117;
-      color: white;
-    }
-    #splash {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0d1117, #1e2634);
+      color: #ff9800;
       font-size: 28px;
       font-weight: bold;
     }
   </style>
+  <script>
+    setTimeout(function(){
+      window.location.href = "home.html";
+    }, 3000); // 3 seconds
+  </script>
 </head>
 <body>
-  <div id="splash">Welcome to Asador 🚀</div>
-
-  <script>
-    // через 3 секунды перенаправление на index.html
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 3000);
-  </script>
+  Welcome to Asador 🚀
 </body>
 </html>
