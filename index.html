@@ -3,34 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome</title>
+  <title>Welcome to Asador</title>
   <style>
     body {
+      margin: 0;
+      padding: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin: 0;
-      background: #f0f8ff;
       font-family: Arial, sans-serif;
-    }
-    h1 {
-      font-size: 2em;
-      color: #007bff;
-      animation: fadeIn 2s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
+      background: linear-gradient(135deg, #0d1117, #1e2634);
+      color: #ff9800;
+      font-size: 28px;
+      font-weight: bold;
     }
   </style>
   <script>
-    setTimeout(() => {
-      window.location.href = "index.html"; // через 3 секунды на главную
-    }, 3000);
+    setTimeout(function(){
+      window.location.href = "home.html";
+    }, 3000); // 3 seconds
   </script>
 </head>
 <body>
-  <h1>Welcome to Asador 🚀</h1>
+  Welcome to Asador 🚀
 </body>
 </html>
