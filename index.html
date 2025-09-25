@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Asador App</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" href="icon-192.png" sizes="192x192">
-  <link rel="icon" href="icon-512.png" sizes="512x512">
-  <link rel="stylesheet" href="public/style.css">
+  <title>Welcome</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background: #f0f8ff;
+      font-family: Arial, sans-serif;
+    }
+    h1 {
+      font-size: 2em;
+      color: #007bff;
+      animation: fadeIn 2s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+  <script>
+    setTimeout(() => {
+      window.location.href = "index.html"; // через 3 секунды на главную
+    }, 3000);
+  </script>
 </head>
 <body>
-  <h1>Добро пожаловать в Asador App!</h1>
-
-  <!-- Форма логина -->
-  <form id="login-form">
-    <input type="text" id="username" placeholder="Имя пользователя" required>
-    <input type="password" id="password" placeholder="Пароль" required>
-    <button type="submit">Войти</button>
-  </form>
-
-  <!-- Контент приложения -->
-  <div id="app"></div>
-
-  <!-- JS -->
-  <script src="config.js"></script>
-  <script src="main.js"></script>
+  <h1>Welcome to Asador 🚀</h1>
 </body>
-</html>>
-
+</html>
