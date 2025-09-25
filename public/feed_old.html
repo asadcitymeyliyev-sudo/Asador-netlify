@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Лента — Asador</title>
+<style>
+body { font-family: sans-serif; background:#f5f5f5; margin:0; padding:0; }
+h2 { text-align:center; }
+.post { background:white; margin:10px auto; padding:10px; max-width:400px; border-radius:10px; box-shadow:0 1px 3px rgba(0,0,0,0.1);}
+.logout, .switch { display:block; text-align:center; margin:10px; cursor:pointer; font-weight:bold; }
+.logout { color:red; }
+.switch { color:blue; }
+#newPost { max-width:400px; margin:10px auto; display:flex; flex-direction:column; }
+#newPost textarea { resize:none; padding:5px; margin-bottom:5px; }
+#loader { text-align:center; margin-top:10px; }
+</style>
+</head>
+<body>
+<h2>Лента</h2>
+
+<div id="loader">Загрузка...</div>
+<div id="feed"></div>
+
+<div id="newPost">
+<textarea id="postText" rows="3" placeholder="Что нового?"></textarea>
+<button onclick="addPost()">Опубликовать</button>
+</div>
+
+<span class="switch" onclick="switchAccount()">Переключить аккаунт</span>
+<span class="logout" onclick="logout()">Выйти</span>
+
+<script>
+async function loadFeed() {
+  const loader = document.getElementById("loader");
+  const container = document.getElementById("feed");
+  loader.style.display = "block";
+  container.innerHTML = "";
+  try {
+    const res = await fetch("/feed");
+    if (res.status === 401) { window.location.href = "/index.html"; return; }
+    const posts = await res.json();
+    loader.style.display = "none";
+    if (!posts.length) { container.innerHTML="<p style='text-align:center;color:gray;'>Постов пока нет</p>"; return; }
+    posts.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "post";
+      div.innerHTML = `<b>${p.username}</b><br/>${p.text}<br/>❤️ ${p.likes} • 💬 ${p.comments}`;
+      container.appendChild(div);
+    });
+  } catch (e) { loader.innerText="Ошибка загрузки"; console.error(e); }
+}
+
+async function addPost() {
+  const text = document.getElementById("postText").value.trim();
+  if (!text) return alert("Введите текст");
+  const res = await fetch("/feed/add", {
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({text})
+  });
+  const data = await res.json();
+  if (data.success) {
+    document.getElementById("postText").value="";
+    loadFeed();
+  } else alert(data.message);
+}
+
+function logout() {
+  document.cookie="sessionId=; Max-Age=0; path=/";
+  window.location.href="/index.html";
+}
+
+function switchAccount() {
+  const accounts = JSON.parse(localStorage.getItem("accounts")||"[]");
+  if (accounts.length<=1) return alert("Нет других аккаунтов");
+  const names = accounts.map(a=>a.username).join("\n");
+  const username = prompt("Выберите аккаунт:\n"+names);
+  if (username) {
+    document.cookie="sessionId=; Max-Age=0; path=/";
+    alert("Выйдите и войдите через логин выбранного аккаунта");
+    window.location.href="/index.html";
+  }
+}
+
+loadFeed();
+</script>
+</body>
+</html>
